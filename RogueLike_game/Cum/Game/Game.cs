@@ -61,7 +61,7 @@ namespace Cum
             CurrentReaper = new Reaper();
             PlayerDirection();
         }
-        
+       
         public void PlayerDirection()
         {
             for (int i = 0; i < CurrentMap.LevelMap.GetLength(0); i++)
@@ -511,6 +511,18 @@ namespace Cum
                 }
                 else
                 {
+                    if (CurrentMap.LevelMap[CurrentPlayer.X, CurrentPlayer.Y].MapCharacter == Constants.SHOTGUN)
+                    {
+                        Console.Clear();
+                        Console.WriteLine(Constants.rifle);
+                        Console.ReadKey();
+                    }
+                    if (CurrentMap.LevelMap[CurrentPlayer.X, CurrentPlayer.Y].MapCharacter == Constants.REVOLVER)
+                    {
+                        Console.Clear();
+                        Console.WriteLine(Constants.revolver);
+                        Console.ReadKey();
+                    }
                     CurrentPlayer.RemoveKey();
                     Console.Beep(2000,100);
                     CurrentMap.LevelMap[CurrentPlayer.X, CurrentPlayer.Y].MapCharacter = Constants.ROOM_INT;
@@ -525,6 +537,12 @@ namespace Cum
                 }
                 else
                 {
+                    if (CurrentMap.LevelMap[CurrentPlayer.X, CurrentPlayer.Y].MapCharacter == Constants.MEDICINE)
+                    {
+                        Console.Clear();
+                        Console.WriteLine(Constants.medcine_2);
+                        Console.ReadKey();
+                    }
                     Console.Beep(2000,100);
                     CurrentMap.LevelMap[CurrentPlayer.X, CurrentPlayer.Y].MapCharacter =
                        Constants.street_char.Contains(
@@ -660,7 +678,6 @@ namespace Cum
                     EquipLight(CurrentPlayer.items[chosen-49]);
                     Console.Clear();
                     CurrentPlayer.InventoryToString();
-                //    Console.WriteLine("You successfully used "+CurrentPlayer.items[chosen-50].GetType());
                 }
             }
             catch
@@ -668,7 +685,11 @@ namespace Cum
                 return;
             }
         }
-
+        /* private void playSound(string pathToSound)
+        {
+            SoundPlayer player = new SoundPlayer(pathToSound);
+            player.Play();
+        }*/
         public void EquipLight(Item item)
         {
             if (item is Medicine)
